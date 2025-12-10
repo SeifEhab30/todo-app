@@ -6,7 +6,7 @@ import com.example.todoapp.model.Task
 
 @Dao
 interface TaskDao {
-
+//queries ashan nmsk mn el tasks
     @Query("SELECT * FROM tasks WHERE userId = :userId ORDER BY timestamp DESC")
     fun getAllTasks(userId: String): LiveData<List<Task>>
 
