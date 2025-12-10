@@ -37,18 +37,15 @@ class TaskViewModelTest {
 
     @Test
     fun `addTask should create task with correct data`() {
-        // Given
         val taskTitle = "Test Task"
         val priority = Priority.HIGH
 
-        // When
         val task = Task(
             title = taskTitle,
             priority = priority,
             userId = testUserId
         )
 
-        // Then
         assert(task.title == taskTitle)
         assert(task.priority == priority)
         assert(task.userId == testUserId)
@@ -57,7 +54,6 @@ class TaskViewModelTest {
 
     @Test
     fun `toggleTaskCompletion should update task completion status`() {
-        // Given
         val task = Task(
             id = 1,
             title = "Test Task",
@@ -66,10 +62,8 @@ class TaskViewModelTest {
             isCompleted = false
         )
 
-        // When
         val updatedTask = task.copy(isCompleted = !task.isCompleted)
 
-        // Then
         assert(updatedTask.isCompleted)
         assert(updatedTask.id == task.id)
         assert(updatedTask.title == task.title)
@@ -77,7 +71,6 @@ class TaskViewModelTest {
 
     @Test
     fun `task should have correct priority levels`() {
-        // Test all priority levels
         val lowTask = Task(
             title = "Low Priority Task",
             priority = Priority.LOW,
@@ -102,10 +95,8 @@ class TaskViewModelTest {
 
     @Test
     fun `task timestamp should be set automatically`() {
-        // Given
         val beforeTime = System.currentTimeMillis()
 
-        // When
         val task = Task(
             title = "Test Task",
             priority = Priority.LOW,
@@ -114,29 +105,25 @@ class TaskViewModelTest {
 
         val afterTime = System.currentTimeMillis()
 
-        // Then
         assert(task.timestamp >= beforeTime)
         assert(task.timestamp <= afterTime)
     }
 
     @Test
     fun `task should have default values`() {
-        // When
         val task = Task(
             title = "Test Task",
             priority = Priority.MEDIUM,
             userId = testUserId
         )
 
-        // Then
-        assert(task.id == 0) // Auto-generated ID default
-        assert(!task.isCompleted) // Default not completed
-        assert(task.timestamp > 0) // Timestamp auto-generated
+        assert(task.id == 0)
+        assert(!task.isCompleted)
+        assert(task.timestamp > 0)
     }
 
     @Test
     fun `task copy should preserve data correctly`() {
-        // Given
         val originalTask = Task(
             id = 1,
             title = "Original Task",
@@ -146,10 +133,8 @@ class TaskViewModelTest {
             userId = testUserId
         )
 
-        // When - Copy with only isCompleted changed
         val copiedTask = originalTask.copy(isCompleted = true)
 
-        // Then - All other fields should be preserved
         assert(copiedTask.id == originalTask.id)
         assert(copiedTask.title == originalTask.title)
         assert(copiedTask.priority == originalTask.priority)

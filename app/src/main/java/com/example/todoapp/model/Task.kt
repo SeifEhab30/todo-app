@@ -15,5 +15,5 @@ data class Task(
     val priority: Priority,
     val timestamp: Long = System.currentTimeMillis(),
     val isCompleted: Boolean = false,
-    val userId: String // Firebase user ID to associate tasks with users
+    val userId: String
 )

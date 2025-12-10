@@ -38,29 +38,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Check if user is logged in
         if (auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
         }
 
-        // Initialize views
         recyclerView = findViewById(R.id.tasksRecyclerView)
         emptyStateLayout = findViewById(R.id.emptyStateLayout)
         fabAddTask = findViewById(R.id.fabAddTask)
         toolbar = findViewById(R.id.toolbar)
 
-        // Setup toolbar
         setSupportActionBar(toolbar)
 
-        // Setup RecyclerView
         setupRecyclerView()
 
-        // Observe tasks
         observeTasks()
 
-        // FAB click listener
         fabAddTask.setOnClickListener {
             showAddTaskDialog()
         }
@@ -86,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         taskViewModel.allTasks.observe(this) { tasks ->
             taskAdapter.submitList(tasks)
 
-            // Show/hide empty state
             if (tasks.isEmpty()) {
                 emptyStateLayout.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE

@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Priority Indicator -->
         <View
             android:id="@+id/priorityIndicator"
             android:layout_width="4dp"
@@ -24,7 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Checkbox -->
         <CheckBox
             android:id="@+id/taskCheckbox"
             android:layout_width="wrap_content"
@@ -33,7 +31,6 @@
             app:layout_constraintStart_toEndOf="@id/priorityIndicator"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Task Title -->
         <TextView
             android:id="@+id/taskTitle"
             android:layout_width="0dp"
@@ -48,7 +45,6 @@
             app:layout_constraintTop_toTopOf="@id/taskCheckbox"
             tools:text="Sample Task Title" />
 
-        <!-- Priority Badge -->
         <TextView
             android:id="@+id/priorityBadge"
             android:layout_width="wrap_content"
@@ -67,7 +63,6 @@
             app:layout_constraintTop_toBottomOf="@id/taskTitle"
             tools:text="HIGH" />
 
-        <!-- Timestamp -->
         <TextView
             android:id="@+id/taskTimestamp"
             android:layout_width="wrap_content"
@@ -80,7 +75,6 @@
             app:layout_constraintTop_toBottomOf="@id/taskTitle"
             tools:text="2 hours ago" />
 
-        <!-- Delete Button -->
         <ImageButton
             android:id="@+id/deleteButton"
             android:layout_width="40dp"

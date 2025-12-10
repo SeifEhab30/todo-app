@@ -31,77 +31,60 @@ class AuthViewModelTest {
 
     @Test
     fun `initial auth state should be Idle`() {
-        // Given - a fresh AuthViewModel would start
         val initialState = AuthState.Idle
 
-        // Then
         assert(initialState is AuthState.Idle)
     }
 
     @Test
     fun `login with empty email should return error`() {
-        // Given
         val email = ""
         val password = "password123"
 
-        // When
         val isValid = email.isNotBlank() && password.isNotBlank()
 
-        // Then
         assert(!isValid)
     }
 
     @Test
     fun `login with empty password should return error`() {
-        // Given
         val email = "test@example.com"
         val password = ""
 
-        // When
         val isValid = email.isNotBlank() && password.isNotBlank()
 
-        // Then
         assert(!isValid)
     }
 
     @Test
     fun `register with mismatched passwords should return error`() {
-        // Given
         val password = "password123"
         val confirmPassword = "password456"
 
-        // When
         val passwordsMatch = password == confirmPassword
 
-        // Then
         assert(!passwordsMatch)
     }
 
     @Test
     fun `register with short password should return error`() {
-        // Given
-        val password = "12345" // Less than 6 characters
+        val password = "12345"
 
-        // When
         val isValidLength = password.length >= 6
 
-        // Then
         assert(!isValidLength)
     }
 
     @Test
     fun `register with valid matching passwords should pass validation`() {
-        // Given
         val email = "test@example.com"
         val password = "password123"
         val confirmPassword = "password123"
 
-        // When
         val isEmailValid = email.isNotBlank()
         val passwordsMatch = password == confirmPassword
         val isPasswordLongEnough = password.length >= 6
 
-        // Then
         assert(isEmailValid)
         assert(passwordsMatch)
         assert(isPasswordLongEnough)
@@ -109,27 +92,22 @@ class AuthViewModelTest {
 
     @Test
     fun `AuthState Error should contain error message`() {
-        // Given
         val errorMessage = "Invalid credentials"
         val errorState = AuthState.Error(errorMessage)
 
-        // Then
         assert(errorState is AuthState.Error)
         assert(errorState.message == errorMessage)
     }
 
     @Test
     fun `AuthState Loading should be correct type`() {
-        // Given
         val loadingState = AuthState.Loading
 
-        // Then
         assert(loadingState is AuthState.Loading)
     }
 
     @Test
     fun `valid email format check`() {
-        // Given
         val validEmails = listOf(
             "test@example.com",
             "user.name@domain.co.uk",
@@ -143,13 +121,11 @@ class AuthViewModelTest {
             ""
         )
 
-        // When/Then - Check valid emails have @ and .
         validEmails.forEach { email ->
             val isValid = email.contains("@") && email.contains(".")
             assert(isValid) { "Expected $email to be valid" }
         }
 
-        // Check invalid emails are missing @ or . or are blank
         invalidEmails.forEach { email ->
             val isInvalid = email.isBlank() ||
                     !email.contains("@") ||

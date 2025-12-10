@@ -76,10 +76,8 @@ class TaskAdapter(
                 }
             }
 
-            // Format timestamp
             taskTimestamp.text = getTimeAgo(task.timestamp)
 
-            // Strike-through completed tasks
             if (task.isCompleted) {
                 taskTitle.paintFlags = taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 taskTitle.alpha = 0.5f
@@ -88,7 +86,6 @@ class TaskAdapter(
                 taskTitle.alpha = 1.0f
             }
 
-            // Set click listeners
             taskCheckbox.setOnCheckedChangeListener { _, _ ->
                 onTaskChecked(task)
             }

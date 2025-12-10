@@ -56,7 +56,6 @@ fun LoginScreen(
                 onLoginSuccess()
             }
             is AuthState.Error -> {
-                // Error is shown in UI
             }
             else -> {}
         }
