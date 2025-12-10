@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Add Internet permission for Firebase -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -16,7 +15,6 @@
         android:theme="@style/Theme.TodoApp"
         tools:targetApi="31">
 
-        <!-- LoginActivity as LAUNCHER (first screen) -->
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="true"
@@ -27,13 +25,11 @@
             </intent-filter>
         </activity>
 
-        <!-- RegisterActivity -->
         <activity
             android:name=".ui.auth.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.TodoApp" />
 
-        <!-- MainActivity (Todo screen) - no longer the launcher -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
