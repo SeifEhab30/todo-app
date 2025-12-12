@@ -152,6 +152,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_statistics -> {
+                launchFlutterStatsApp()
+                true
+            }
             R.id.action_logout -> {
                 showLogoutConfirmationDialog()
                 true
@@ -187,5 +191,36 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    private fun launchFlutterStatsApp() {
+        try {
+            val tasks = taskViewModel.allTasks.value ?: emptyList()
+            val totalTasks = tasks.size
+            val completedTasks = tasks.count { it.isCompleted }
+            val pendingTasks = tasks.count { !it.isCompleted }
+
+
+            val launchIntent = packageManager.getLaunchIntentForPackage("com.example.todo_stats")
+
+            if (launchIntent != null) {
+                launchIntent.apply {
+                    putExtra("TOTAL_TASKS", totalTasks)
+                    putExtra("COMPLETED_TASKS", completedTasks)
+                    putExtra("PENDING_TASKS", pendingTasks)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(launchIntent)
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("Flutter Stats App Not Found")
+                    .setMessage("Stats:\n📊 Total: $totalTasks\n✅ Completed: $completedTasks\n⏳ Pending: $pendingTasks")
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
     }
 }

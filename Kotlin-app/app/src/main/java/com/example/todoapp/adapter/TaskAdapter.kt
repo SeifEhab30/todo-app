@@ -23,13 +23,12 @@ class TaskAdapter(
     private val onTaskDeleted: (Task) -> Unit
 ) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
-    //fun ashan el oncreate
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_task, parent, false)
         return TaskViewHolder(view)
     }
-//blind
+
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -46,7 +45,7 @@ class TaskAdapter(
             taskTitle.text = task.title
             taskCheckbox.isChecked = task.isCompleted
 
-         //alaa 7sb el ahmia
+            // Set priority badge and colors
             when (task.priority) {
                 Priority.HIGH -> {
                     priorityBadge.text = "HIGH"
